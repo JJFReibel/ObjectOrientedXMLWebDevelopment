@@ -1,0 +1,123 @@
+<!--
+MIT License
+
+Copyright (c) 2020 Jean-Jacques François Reibel
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { background-color:gray; }
+.highlightme { background-color:#FFFF00; }
+div { background-color:#B0B0B0; }
+</style>
+</head>
+<body>
+<div>
+<p>
+This was created with XML, JavaScript, HTML, and CSS
+</p>
+</div>
+<div>
+<p>Car as a class diagram in XML</p>
+<p id="wheelsXML"></p>
+<p id="doorsXML"></p>
+<p id="cylindersXML"></p>
+</div>
+<div>
+<p>Car as a class and usable object in XML</p>
+<p id="wheelsCheckXML"></p>
+<p id="doorsCheckXML"></p>
+<p id="cylindersCheckXML"></p>
+</div>
+<div>
+<p id="addWheelsXML"></p>
+<p id="wheelsCheck2XML"></p>
+<p id="doorsCheck2XML"></p>
+<p id="cylindersCheck2XML"></p>
+</div>
+<script>
+var subaru, x;
+var parser, xmlDoc;
+var subaru = 
+"<car>" +
+	"<attribute1>" +
+	"<name>wheels</name>" +
+	"<type>integer</type>" +
+	"</attribute1>" +
+    "<attribute2>" +
+	"<name>doors</name>" +
+	"<type>integer</type>" +
+	"</attribute2>" +
+    "<attribute3>" +
+	"<name>cylinders</name>" +
+	"<type>integer</type>" +
+	"</attribute3>" +
+"</car>";
+
+parser = new DOMParser();
+xmlDoc = parser.parseFromString(subaru,"text/xml");
+
+document.getElementById("wheelsXML").innerHTML = "Car attribute 1: " + 
+xmlDoc.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+
+document.getElementById("doorsXML").innerHTML = "Car attribute 2: " + 
+xmlDoc.getElementsByTagName("name")[1].childNodes[0].nodeValue;
+
+document.getElementById("cylindersXML").innerHTML = "Car attribute 3: " + 
+xmlDoc.getElementsByTagName("name")[2].childNodes[0].nodeValue;
+
+subaru = 
+"<car>" +
+	"<class>car</class>" +
+	"<wheels>4</wheels>" +
+	"<doors>4</doors>" +
+    "<cylinders>4</cylinders>" +
+"</car>";
+
+parser = new DOMParser();
+xmlDoc = parser.parseFromString(subaru,"text/xml");
+
+document.getElementById("wheelsCheckXML").innerHTML = "Wheel check: " + 
+xmlDoc.getElementsByTagName("wheels")[0].childNodes[0].nodeValue;
+
+document.getElementById("doorsCheckXML").innerHTML = "Door check: " + 
+xmlDoc.getElementsByTagName("doors")[0].childNodes[0].nodeValue;
+
+document.getElementById("cylindersCheckXML").innerHTML = "Cylinder check: " + 
+xmlDoc.getElementsByTagName("cylinders")[0].childNodes[0].nodeValue;
+
+xmlDoc.getElementsByTagName("wheels")[0].childNodes[0].nodeValue = "5";
+
+//Manipulating the XML data must be done with a call to the XML doc
+document.getElementById("addWheelsXML").innerHTML = "Added wheel directly to car object.";
+
+document.getElementById("wheelsCheck2XML").innerHTML = "Wheel check: " + xmlDoc.getElementsByTagName("wheels")[0].childNodes[0].nodeValue;
+
+document.getElementById("doorsCheck2XML").innerHTML = "Door check: " + xmlDoc.getElementsByTagName("doors")[0].childNodes[0].nodeValue;
+
+document.getElementById("cylindersCheck2XML").innerHTML = "Cylinder check: " + xmlDoc.getElementsByTagName("cylinders")[0].childNodes[0].nodeValue;
+
+
+</script>
+
+</body>
+</html>
